@@ -1,3 +1,5 @@
+pub mod grid;
+
 pub trait StrExt {
     fn index(&self, c: u8) -> Option<usize>;
     fn split_by(&self, c: u8) -> (&str, &str);
@@ -14,5 +16,15 @@ impl StrExt for str {
     }
     fn to_u32(&self) -> u32 {
         self.parse().unwrap()
+    }
+}
+
+pub trait NumExt {
+    fn num_digits(&self) -> u32;
+}
+
+impl NumExt for u32 {
+    fn num_digits(&self) -> u32 {
+        format!("{self}").len() as u32
     }
 }
