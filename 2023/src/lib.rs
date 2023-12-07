@@ -1,4 +1,4 @@
-use std::fmt::Debug;
+use std::fmt::{Debug, Display, Formatter};
 use std::str::FromStr;
 
 pub mod grid;
@@ -48,5 +48,20 @@ pub trait NumExt {
 impl NumExt for u32 {
     fn num_digits(&self) -> u32 {
         format!("{self}").len() as u32
+    }
+}
+
+pub struct DisplaySlice<'a, T>(pub &'a [T]);
+
+impl<'a, T: Display> Display for DisplaySlice<'a, T> {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(f, "[")?;
+        for (index, item) in self.0.iter().enumerate() {
+            write!(f, "{item}")?;
+            if index != self.0.len() - 1 {
+                write!(f, ", ")?;
+            }
+        }
+        write!(f, "]")
     }
 }
