@@ -1,7 +1,10 @@
+use fxhash::FxBuildHasher;
 use std::fmt::{Debug, Display, Formatter};
 use std::str::FromStr;
 
 pub mod grid;
+
+pub type Map<K, V> = hashbrown::HashMap<K, V, FxBuildHasher>;
 
 pub trait StrExt {
     fn index(&self, c: u8) -> Option<usize>;
