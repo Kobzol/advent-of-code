@@ -16,6 +16,7 @@ pub trait StrExt {
 
     fn to_u32(&self) -> u32;
     fn to_u64(&self) -> u64;
+    fn to_i64(&self) -> i64;
 }
 
 impl StrExt for str {
@@ -40,6 +41,9 @@ impl StrExt for str {
         self.parse().unwrap()
     }
     fn to_u64(&self) -> u64 {
+        self.parse().unwrap()
+    }
+    fn to_i64(&self) -> i64 {
         self.parse().unwrap()
     }
 }
