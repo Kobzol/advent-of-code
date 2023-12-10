@@ -5,6 +5,7 @@ use std::str::FromStr;
 pub mod grid;
 
 pub type Map<K, V> = hashbrown::HashMap<K, V, FxBuildHasher>;
+pub type Set<K> = hashbrown::HashSet<K, FxBuildHasher>;
 
 pub trait StrExt {
     fn index(&self, c: u8) -> Option<usize>;
@@ -71,4 +72,9 @@ impl<'a, T: Display> Display for DisplaySlice<'a, T> {
         }
         write!(f, "]")
     }
+}
+
+pub fn debug_read_line() {
+    let mut line = String::new();
+    std::io::stdin().read_line(&mut line).unwrap();
 }
