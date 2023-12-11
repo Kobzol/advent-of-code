@@ -12,11 +12,27 @@ impl Grid {
         }
     }
 
+    pub fn from_rows(rows: Vec<Vec<u8>>) -> Self {
+        Self { rows }
+    }
+
     pub fn width(&self) -> usize {
         self.rows[0].len()
     }
     pub fn height(&self) -> usize {
         self.rows.len()
+    }
+
+    pub fn into_rows(self) -> Vec<Vec<u8>> {
+        self.rows
+    }
+
+    pub fn transpose(self) -> Self {
+        let mut rows = vec![vec![b' '; self.height()]; self.width()];
+        for (pos, item) in self.items() {
+            rows[pos.col as usize][pos.row as usize] = item;
+        }
+        Self { rows }
     }
 
     pub fn get<P: Into<Position2D>>(&self, pos: P) -> Option<u8> {
@@ -113,6 +129,13 @@ pub struct Position2D {
 }
 
 impl Position2D {
+    pub fn urow(&self) -> usize {
+        self.row.try_into().unwrap()
+    }
+    pub fn ucol(&self) -> usize {
+        self.col.try_into().unwrap()
+    }
+
     pub fn up(&self) -> Position2D {
         Position2D {
             row: self.row - 1,
