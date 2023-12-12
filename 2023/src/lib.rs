@@ -1,4 +1,5 @@
 use fxhash::FxBuildHasher;
+use indicatif::{ProgressIterator, ProgressStyle};
 use std::fmt::{Debug, Display, Formatter};
 use std::str::FromStr;
 
@@ -77,4 +78,15 @@ impl<'a, T: Display> Display for DisplaySlice<'a, T> {
 pub fn debug_read_line() {
     let mut line = String::new();
     std::io::stdin().read_line(&mut line).unwrap();
+}
+
+pub fn progress_bar<I: Iterator<Item = T> + ExactSizeIterator, T>(
+    it: I,
+) -> impl Iterator<Item = T> {
+    it.progress_with_style(
+        ProgressStyle::with_template(
+            "elapsed:[{elapsed_precise}] rem:[{eta_precise}] [{per_sec}] {bar:40.cyan/blue} {pos:>7}/{len:7} {msg}",
+        )
+        .unwrap(),
+    )
 }
