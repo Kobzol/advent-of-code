@@ -27,6 +27,18 @@ impl Grid {
         self.rows
     }
 
+    pub fn row(&self, index: usize) -> &[u8] {
+        self.rows[index].as_slice()
+    }
+
+    pub fn col(&self, index: usize) -> Vec<u8> {
+        let mut items = vec![];
+        for row in 0..self.height() {
+            items.push(self.rows[row][index]);
+        }
+        items
+    }
+
     pub fn transpose(self) -> Self {
         let mut rows = vec![vec![b' '; self.height()]; self.width()];
         for (pos, item) in self.items() {
@@ -97,6 +109,14 @@ impl Grid {
             items.push((position, ch));
         });
         items
+    }
+
+    pub fn positions(&self) -> Vec<Position2D> {
+        let mut positions = vec![];
+        self.for_each(|position, ch| {
+            positions.push(position);
+        });
+        positions
     }
 
     pub fn find_pos(&self, c: u8) -> Position2D {
