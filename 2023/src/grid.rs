@@ -1,6 +1,6 @@
 use std::fmt::{Display, Formatter};
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Hash, Eq, PartialEq)]
 pub struct Grid {
     rows: Vec<Vec<u8>>,
 }
@@ -68,6 +68,14 @@ impl Grid {
         }
     }
 
+    pub fn swap<P1: Into<Position2D>, P2: Into<Position2D>>(&mut self, p1: P1, p2: P2) {
+        let p1 = p1.into();
+        let p2 = p2.into();
+        let a = self.get_force(p1);
+        self.set(p1, self.get_force(p2));
+        self.set(p2, a);
+    }
+
     pub fn neighbours<P: Into<Position2D>>(&self, pos: P) -> Vec<u8> {
         self.neighbour_positions(pos)
             .into_iter()
@@ -130,6 +138,14 @@ impl Grid {
 
     pub fn contains_pos<P: Into<Position2D>>(&self, pos: P) -> bool {
         self.get(pos).is_some()
+    }
+
+    pub fn flatten(&self) -> Vec<u8> {
+        let mut items = vec![];
+        for (_, item) in self.items() {
+            items.push(item);
+        }
+        items
     }
 }
 
