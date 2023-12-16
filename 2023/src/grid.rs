@@ -1,4 +1,5 @@
 use std::fmt::{Display, Formatter};
+use std::ops::Add;
 
 #[derive(Debug, Clone, Hash, Eq, PartialEq)]
 pub struct Grid {
@@ -121,7 +122,7 @@ impl Grid {
 
     pub fn positions(&self) -> Vec<Position2D> {
         let mut positions = vec![];
-        self.for_each(|position, ch| {
+        self.for_each(|position, _| {
             positions.push(position);
         });
         positions
@@ -216,5 +217,16 @@ impl From<(usize, usize)> for Position2D {
 impl Display for Position2D {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         write!(f, "({}, {})", self.row, self.col)
+    }
+}
+
+impl Add for Position2D {
+    type Output = Position2D;
+
+    fn add(self, rhs: Self) -> Self::Output {
+        Self {
+            row: self.row + rhs.row,
+            col: self.col + rhs.col,
+        }
     }
 }
