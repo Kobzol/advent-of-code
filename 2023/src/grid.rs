@@ -77,14 +77,14 @@ impl Grid {
         self.set(p2, a);
     }
 
-    pub fn neighbours<P: Into<Position2D>>(&self, pos: P) -> Vec<u8> {
-        self.neighbour_positions(pos)
+    pub fn neighbours_9<P: Into<Position2D>>(&self, pos: P) -> Vec<u8> {
+        self.neighbour_positions_9(pos)
             .into_iter()
             .map(|pos| self.get_force(pos))
             .collect()
     }
 
-    pub fn neighbour_positions<P: Into<Position2D>>(&self, pos: P) -> Vec<Position2D> {
+    pub fn neighbour_positions_9<P: Into<Position2D>>(&self, pos: P) -> Vec<Position2D> {
         let pos = pos.into();
         let mut positions = vec![];
         for rx in -1..2 {
@@ -98,6 +98,24 @@ impl Grid {
                 if self.get((r, c)).is_some() {
                     positions.push(Position2D { row: r, col: c });
                 }
+            }
+        }
+        positions
+    }
+
+    pub fn neighbour_positions_4<P: Into<Position2D>>(&self, pos: P) -> Vec<Position2D> {
+        const DIRS: [Position2D; 4] = [
+            Position2D::new(0, 1),
+            Position2D::new(1, 0),
+            Position2D::new(0, -1),
+            Position2D::new(-1, 0),
+        ];
+        let pos = pos.into();
+        let mut positions = vec![];
+        for dir in DIRS {
+            let new_pos = pos + dir;
+            if self.get(new_pos).is_some() {
+                positions.push(new_pos);
             }
         }
         positions
@@ -166,6 +184,10 @@ pub struct Position2D {
 }
 
 impl Position2D {
+    pub const fn new(row: isize, col: isize) -> Self {
+        Self { row, col }
+    }
+
     pub fn urow(&self) -> usize {
         self.row.try_into().unwrap()
     }

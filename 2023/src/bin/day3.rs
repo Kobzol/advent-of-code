@@ -25,7 +25,7 @@ fn main() -> anyhow::Result<()> {
         .into_iter()
         .filter(|pn| {
             pn.positions().into_iter().any(|pos| {
-                grid.neighbours(pos.row as isize, pos.col as isize)
+                grid.neighbours_9(pos.row as isize, pos.col as isize)
                     .iter()
                     .any(|&c| c == '*')
             })
@@ -39,7 +39,7 @@ fn main() -> anyhow::Result<()> {
             let neighbours = part_numbers
                 .iter()
                 .filter(|pn| {
-                    grid.neighbour_positions(position.irow(), position.icol())
+                    grid.neighbour_positions_9(position.irow(), position.icol())
                         .into_iter()
                         .any(|pos| pn.positions().contains(&pos))
                 })
