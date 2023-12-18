@@ -1,5 +1,5 @@
 use std::fmt::{Display, Formatter};
-use std::ops::Add;
+use std::ops::{Add, Mul};
 
 #[derive(Debug, Clone, Hash, Eq, PartialEq)]
 pub struct Grid {
@@ -249,6 +249,17 @@ impl Add for Position2D {
         Self {
             row: self.row + rhs.row,
             col: self.col + rhs.col,
+        }
+    }
+}
+
+impl Mul<isize> for Position2D {
+    type Output = Position2D;
+
+    fn mul(self, rhs: isize) -> Self::Output {
+        Self {
+            row: self.row * rhs,
+            col: self.col * rhs,
         }
     }
 }
