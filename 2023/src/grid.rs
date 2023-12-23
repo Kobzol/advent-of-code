@@ -219,6 +219,12 @@ impl Position2D {
             col: self.col + 1,
         }
     }
+
+    pub fn manhattan(&self, other: Self) -> u64 {
+        let row = (other.row - self.row).abs();
+        let col = (other.col - self.col).abs();
+        (row + col) as u64
+    }
 }
 
 impl From<(isize, isize)> for Position2D {
