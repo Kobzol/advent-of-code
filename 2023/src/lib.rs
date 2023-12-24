@@ -4,6 +4,7 @@ use std::fmt::{Debug, Display, Formatter};
 use std::str::FromStr;
 
 pub mod grid;
+pub mod vector;
 
 pub type Map<K, V> = hashbrown::HashMap<K, V, FxBuildHasher>;
 pub type Set<K> = hashbrown::HashSet<K, FxBuildHasher>;

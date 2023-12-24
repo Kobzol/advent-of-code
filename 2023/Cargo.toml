@@ -2,7 +2,7 @@
 name = "aoc2023"
 version = "0.1.0"
 edition = "2021"
-default-run = "day23"
+default-run = "day24"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -15,6 +15,9 @@ hashbrown = "0.14.3"
 pathfinding = "4.4.0"
 indicatif = { version = "0.17.7", features = ["rayon"] }
 rayon = "1.8.0"
+line_intersection = "0.4.0"
+geo = "0.4.13"
+z3 = "0.12.1"
 
 [profile.release]
 strip = "debuginfo"

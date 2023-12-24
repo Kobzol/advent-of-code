@@ -1,5 +1,6 @@
 use std::fmt::{Display, Formatter};
-use std::ops::{Add, Mul};
+
+use crate::vector::Position2D;
 
 #[derive(Debug, Clone, Hash, Eq, PartialEq)]
 pub struct Grid {
@@ -174,98 +175,5 @@ impl Display for Grid {
             writeln!(f, "{}", std::str::from_utf8(row).unwrap())?;
         }
         Ok(())
-    }
-}
-
-#[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Copy, Clone, Hash)]
-pub struct Position2D {
-    pub row: isize,
-    pub col: isize,
-}
-
-impl Position2D {
-    pub const fn new(row: isize, col: isize) -> Self {
-        Self { row, col }
-    }
-
-    pub fn urow(&self) -> usize {
-        self.row.try_into().unwrap()
-    }
-    pub fn ucol(&self) -> usize {
-        self.col.try_into().unwrap()
-    }
-
-    pub fn up(&self) -> Position2D {
-        Position2D {
-            row: self.row - 1,
-            col: self.col,
-        }
-    }
-    pub fn down(&self) -> Position2D {
-        Position2D {
-            row: self.row + 1,
-            col: self.col,
-        }
-    }
-    pub fn left(&self) -> Position2D {
-        Position2D {
-            row: self.row,
-            col: self.col - 1,
-        }
-    }
-    pub fn right(&self) -> Position2D {
-        Position2D {
-            row: self.row,
-            col: self.col + 1,
-        }
-    }
-
-    pub fn manhattan(&self, other: Self) -> u64 {
-        let row = (other.row - self.row).abs();
-        let col = (other.col - self.col).abs();
-        (row + col) as u64
-    }
-}
-
-impl From<(isize, isize)> for Position2D {
-    fn from((row, col): (isize, isize)) -> Self {
-        Self { row, col }
-    }
-}
-
-impl From<(usize, usize)> for Position2D {
-    fn from((row, col): (usize, usize)) -> Self {
-        Self {
-            row: row as isize,
-            col: col as isize,
-        }
-    }
-}
-
-impl Display for Position2D {
-    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        write!(f, "({}, {})", self.row, self.col)
-    }
-}
-
-impl Add for Position2D {
-    type Output = Position2D;
-
-    fn add(self, rhs: Self) -> Self::Output {
-        Self {
-            row: self.row + rhs.row,
-            col: self.col + rhs.col,
-        }
-    }
-}
-
-impl Mul<isize> for Position2D {
-    type Output = Position2D;
-
-    fn mul(self, rhs: isize) -> Self::Output {
-        Self {
-            row: self.row * rhs,
-            col: self.col * rhs,
-        }
     }
 }
