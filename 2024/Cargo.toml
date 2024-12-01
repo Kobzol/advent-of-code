@@ -1,0 +1,29 @@
+[package]
+name = "aoc2024"
+version = "0.1.0"
+edition = "2021"
+default-run = "day1"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1"
+regex = "1.10"
+itertools = "0.13"
+fxhash = "0.2"
+hashbrown = "0.15"
+#pathfinding = "4.4"
+indicatif = { version = "0.17", features = ["rayon"] }
+#rayon = "1.8"
+#line_intersection = "0.4"
+#geo = "0.29"
+#z3 = "0.12"
+
+[profile.release]
+strip = "debuginfo"
+
+[profile.dist]
+inherits = "release"
+lto = "thin"
+codegen-units = 1
+strip = "debuginfo"
