@@ -1,5 +1,5 @@
 use std::fmt::{Display, Formatter};
-use std::ops::{Add, Mul};
+use std::ops::{Add, AddAssign, Mul, Sub, SubAssign};
 
 #[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Copy, Clone, Hash)]
 pub struct Position2D {
@@ -80,6 +80,31 @@ impl Add for Position2D {
             row: self.row + rhs.row,
             col: self.col + rhs.col,
         }
+    }
+}
+
+impl AddAssign for Position2D {
+    fn add_assign(&mut self, rhs: Self) {
+        self.row += rhs.row;
+        self.col += rhs.col;
+    }
+}
+
+impl Sub for Position2D {
+    type Output = Position2D;
+
+    fn sub(self, rhs: Self) -> Self::Output {
+        Self {
+            row: self.row - rhs.row,
+            col: self.col - rhs.col,
+        }
+    }
+}
+
+impl SubAssign for Position2D {
+    fn sub_assign(&mut self, rhs: Self) {
+        self.row -= rhs.row;
+        self.col -= rhs.col;
     }
 }
 
