@@ -2,7 +2,7 @@
 name = "aoc2024"
 version = "0.1.0"
 edition = "2021"
-default-run = "day4"
+default-run = "day5"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -11,10 +11,11 @@ anyhow = "1"
 regex = "1.10"
 itertools = "0.13"
 fxhash = "0.2"
-hashbrown = "0.15"
+hashbrown = { version = "0.15", features = ["inline-more"] }
 #pathfinding = "4.4"
 indicatif = { version = "0.17", features = ["rayon"] }
-#rayon = "1.8"
+rayon = "1.8"
+topological-sort = "0.2.2"
 #line_intersection = "0.4"
 #geo = "0.29"
 #z3 = "0.12"
