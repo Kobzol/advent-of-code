@@ -61,6 +61,12 @@ impl NumExt for u32 {
     }
 }
 
+impl NumExt for u64 {
+    fn num_digits(&self) -> u32 {
+        format!("{self}").len() as u32
+    }
+}
+
 pub struct DisplaySlice<'a, T>(pub &'a [T]);
 
 impl<'a, T: Display> Display for DisplaySlice<'a, T> {
