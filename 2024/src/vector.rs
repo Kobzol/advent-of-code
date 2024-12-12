@@ -120,6 +120,55 @@ impl Mul<isize> for Position2D {
 }
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq, Hash)]
+pub enum Direction2D {
+    Down,
+    Left,
+    Up,
+    Right,
+}
+
+impl Direction2D {
+    pub fn all() -> [Direction2D; 4] {
+        [Self::Down, Self::Left, Self::Up, Self::Right]
+    }
+
+    pub fn as_pos(&self) -> Position2D {
+        match self {
+            Direction2D::Down => Position2D::new(1, 0),
+            Direction2D::Left => Position2D::new(0, -1),
+            Direction2D::Up => Position2D::new(-1, 0),
+            Direction2D::Right => Position2D::new(0, 1),
+        }
+    }
+
+    pub fn turn_right(&self) -> Direction2D {
+        match self {
+            Direction2D::Down => Direction2D::Left,
+            Direction2D::Left => Direction2D::Up,
+            Direction2D::Up => Direction2D::Right,
+            Direction2D::Right => Direction2D::Down,
+        }
+    }
+
+    pub fn turn_left(&self) -> Direction2D {
+        match self {
+            Direction2D::Down => Direction2D::Right,
+            Direction2D::Left => Direction2D::Down,
+            Direction2D::Up => Direction2D::Left,
+            Direction2D::Right => Direction2D::Up,
+        }
+    }
+}
+
+impl Add<Direction2D> for Position2D {
+    type Output = Position2D;
+
+    fn add(self, rhs: Direction2D) -> Self::Output {
+        self + rhs.as_pos()
+    }
+}
+
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Hash)]
 pub struct Position3D(pub i64, pub i64, pub i64);
 
 impl Position3D {
