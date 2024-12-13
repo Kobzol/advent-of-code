@@ -2,7 +2,7 @@
 name = "aoc2024"
 version = "0.1.0"
 edition = "2021"
-default-run = "day12"
+default-run = "day13"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -18,7 +18,7 @@ rayon = "1.8"
 topological-sort = "0.2.2"
 #line_intersection = "0.4"
 #geo = "0.29"
-#z3 = "0.12"
+z3 = "0.12"
 
 [profile.release]
 strip = "debuginfo"
