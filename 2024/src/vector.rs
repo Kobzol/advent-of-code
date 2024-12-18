@@ -11,6 +11,13 @@ impl Position2D {
     pub const fn new(row: isize, col: isize) -> Self {
         Self { row, col }
     }
+    pub fn from_slice(values: &[isize]) -> Self {
+        assert_eq!(values.len(), 2);
+        Self {
+            row: values[0],
+            col: values[1],
+        }
+    }
 
     pub fn urow(&self) -> usize {
         self.row.try_into().unwrap()
