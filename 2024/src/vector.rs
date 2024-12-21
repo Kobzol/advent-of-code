@@ -56,6 +56,9 @@ impl Position2D {
         let col = (other.col - self.col).abs();
         (row + col) as u64
     }
+    pub fn is_within(&self, rows: isize, cols: isize) -> bool {
+        self.row >= 0 && self.row < rows && self.col >= 0 && self.col < cols
+    }
 }
 
 impl From<(isize, isize)> for Position2D {
