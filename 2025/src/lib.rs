@@ -41,13 +41,13 @@ impl StrExt for str {
     }
 
     fn to_u32(&self) -> u32 {
-        self.parse().unwrap()
+        self.trim().parse().unwrap()
     }
     fn to_u64(&self) -> u64 {
-        self.parse().unwrap()
+        self.trim().parse().unwrap()
     }
     fn to_i64(&self) -> i64 {
-        self.parse().unwrap()
+        self.trim().parse().unwrap()
     }
 }
 
