@@ -2,7 +2,7 @@
 name = "aoc2025"
 version = "0.1.0"
 edition = "2024"
-default-run = "day7"
+default-run = "day8"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -20,6 +20,7 @@ indicatif = { version = "0.17", features = ["rayon"] }
 #geo = "0.29"
 #bstr = "1.11"
 #z3 = "0.12"
+union-find = "0.4.3"
 
 [profile.dist]
 inherits = "release"

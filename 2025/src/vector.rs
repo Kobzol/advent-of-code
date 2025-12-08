@@ -206,6 +206,10 @@ impl Position3D {
         new
     }
 
+    pub fn euclidean_squared(&self, other: Self) -> i64 {
+        (self.0 - other.0).pow(2) + (self.1 - other.1).pow(2) + (self.2 - other.2).pow(2)
+    }
+
     pub fn mut_dim_ref(&mut self, index: usize) -> &mut i64 {
         match index {
             0 => &mut self.0,

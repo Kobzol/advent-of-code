@@ -16,6 +16,9 @@ pub trait StrExt {
     fn split_nums_whitespace<T: FromStr>(&self) -> Vec<T>
     where
         <T as FromStr>::Err: Debug;
+    fn split_nums_by<T: FromStr>(&self, split: char) -> Vec<T>
+    where
+        <T as FromStr>::Err: Debug;
 
     fn to_u32(&self) -> u32;
     fn to_u64(&self) -> u64;
@@ -38,6 +41,13 @@ impl StrExt for str {
         self.split_ascii_whitespace()
             .map(|v| v.parse().unwrap())
             .collect()
+    }
+
+    fn split_nums_by<T: FromStr>(&self, split: char) -> Vec<T>
+    where
+        <T as FromStr>::Err: Debug,
+    {
+        self.split(split).map(|v| v.parse().unwrap()).collect()
     }
 
     fn to_u32(&self) -> u32 {
