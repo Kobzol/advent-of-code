@@ -26,6 +26,13 @@ impl Position2D {
         self.col.try_into().unwrap()
     }
 
+    pub fn with_row(&self, row: isize) -> Self {
+        Self { row, col: self.col }
+    }
+    pub fn with_col(&self, col: isize) -> Self {
+        Self { row: self.row, col }
+    }
+
     pub fn up(&self) -> Position2D {
         Position2D {
             row: self.row - 1,
