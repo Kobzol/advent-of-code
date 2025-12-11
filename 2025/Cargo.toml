@@ -2,7 +2,7 @@
 name = "aoc2025"
 version = "0.1.0"
 edition = "2024"
-default-run = "day10"
+default-run = "day11"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
